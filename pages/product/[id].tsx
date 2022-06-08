@@ -18,7 +18,7 @@ const Product = (): JSX.Element => {
   useEffect(() => {
     getProduct();
   }, [id]);
-  
+
   return (
     <>
       <h2>{product.id}</h2>

@@ -7,10 +7,10 @@ const Home = (): JSX.Element => {
 
   const getProducts = async () => {
     const response = await fetch("/api/avo");
-    const { data, length } = await response.json();
+    const { data } = await response.json();
     setProducts(data);
   };
-  
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -18,7 +18,6 @@ const Home = (): JSX.Element => {
   return (
     <div>
       <h2>Home</h2>
-      <NavBar />
       {!products.length && <h1>Loading...</h1>}
       {products.length > 0 &&
         products.map(({ id, name }) => {
