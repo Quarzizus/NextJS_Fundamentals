@@ -1,0 +1,12 @@
+.Home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.Home h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

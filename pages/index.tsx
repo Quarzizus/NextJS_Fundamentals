@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import { NavBar } from "../components/Navbar";
+import Image from "next/image";
+import AvocadoIcon from "../public/icons/avocado.png";
+import styles from "./styles.module.css";
 import { TProduct } from "../database/types";
+import { ListOfAvocados } from "../components/ListOfAvocados";
 
 const Home = (): JSX.Element => {
   const [products, setProducts] = useState<TProduct[]>([]);
@@ -16,19 +19,19 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <div>
-      <h2>Home</h2>
-      {!products.length && <h1>Loading...</h1>}
-      {products.length > 0 &&
-        products.map(({ id, name }) => {
-          return (
-            <div key={id}>
-              <a href={`/product/${id}`}>
-                <h2>{name}</h2>
-              </a>
-            </div>
-          );
-        })}
+    <div className={styles.Home}>
+      <h2>
+        Avo
+        <Image
+          src={AvocadoIcon}
+          width="25px"
+          height="25px"
+          className={styles.img}
+          placeholder="blur"
+        />
+        Store
+      </h2>
+      <ListOfAvocados products={products} />
     </div>
   );
 };

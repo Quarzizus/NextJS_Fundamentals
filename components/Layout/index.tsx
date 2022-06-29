@@ -1,5 +1,6 @@
 import { Footer } from "../Footer";
-import { NavBar } from "../Navbar";
+import { NavBar } from "../NavBar";
+import styles from "./styles.module.css";
 
 interface props {
   children?: JSX.Element | JSX.Element[];
@@ -7,7 +8,7 @@ interface props {
 
 const Layout = ({ children }: props): JSX.Element => {
   return (
-    <div className="Layout">
+    <div className={styles.Layout}>
       <NavBar />
       {children}
       <Footer />
