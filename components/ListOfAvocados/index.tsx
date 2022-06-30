@@ -1,5 +1,6 @@
 import { TProduct } from "../../database/types";
 import { Avocado } from "../Avocado";
+import styles from "./styles.module.css";
 
 interface props {
   products: TProduct[];
@@ -7,7 +8,7 @@ interface props {
 
 const ListOfAvocados = ({ products }: props): JSX.Element => {
   return (
-    <ul>
+    <ul className={styles.ListOfAvocados}>
       {!products.length && <h1>Loading...</h1>}
       {products.length > 0 &&
         products.map((avocado) => {

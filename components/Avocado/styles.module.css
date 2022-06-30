@@ -1,0 +1,25 @@
+.Avocado {
+  border-radius: 4px;
+  height: 350px;
+  display: grid;
+  grid-template-rows: 1fr 90px;
+  border: 1px solid rgb(198, 198, 198);
+}
+
+.Avocado a {
+  background-color: white;
+  border-bottom: 1px solid rgb(198, 198, 198);
+  display: flex;
+  justify-content: center;
+}
+
+.Avocado > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 0 0 20px;
+}
+
+.Avocado div p {
+  color: rgb(160, 160, 160);
+}
