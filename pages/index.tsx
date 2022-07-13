@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import AvocadoIcon from "../public/icons/avocado.png";
 import styles from "./styles.module.css";
-import { TProduct } from "../database/types";
+import { TAPIAvoResponse, TProduct } from "../database/types";
 import { ListOfAvocados } from "../components/ListOfAvocados";
+import { GetStaticProps } from "next";
 
-const Home = (): JSX.Element => {
-  const [products, setProducts] = useState<TProduct[]>([]);
-
-  const getProducts = async () => {
-    const response = await fetch("/api/avo");
-    const { data } = await response.json();
-    setProducts(data);
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await fetch(
+    "https://next-fundamentals-khaki.vercel.app/api/avo"
+  );
+  const { data }: TAPIAvoResponse = await response.json();
+  return {
+    props: {
+      products: data,
+    },
   };
+};
 
-  useEffect(() => {
-    getProducts();
-  }, []);
-
+const Home = ({ products }: { products: TProduct[] }): JSX.Element => {
   return (
     <div className={styles.Home}>
       <h2>
@@ -27,7 +28,6 @@ const Home = (): JSX.Element => {
           width="25px"
           height="25px"
           className={styles.img}
-          placeholder="blur"
         />
         Store
       </h2>
