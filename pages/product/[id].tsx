@@ -1,24 +1,37 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { TProduct } from "../../database/types";
+import { GetStaticPaths, GetStaticProps } from "next";
+import React from "react";
+import { TAPIAvoResponse, TProduct } from "../../database/types";
 
-const Product = (): JSX.Element => {
-  const router = useRouter();
-  const [product, setProduct] = useState<TProduct>({} as TProduct);
-  const { id } = router.query;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response = await fetch(
+    "https://next-fundamentals-khaki.vercel.app/api/avo"
+  );
+  const { data }: TAPIAvoResponse = await response.json();
 
-  const getProduct = async () => {
-    if (id) {
-      const response = await fetch("/api/avo/product/" + id);
-      const data = await response.json();
-      setProduct(data);
-    }
+  const paths = data.map((avo) => ({
+    params: { id: avo.id },
+  }));
+
+  return {
+    paths,
+    // 404 for everything else
+    fallback: false,
   };
+};
 
-  useEffect(() => {
-    getProduct();
-  }, [id]);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const response = await fetch(
+    "https://next-fundamentals-khaki.vercel.app/api/avo/product/" + params?.id
+  );
+  const data: TProduct = await response.json();
+  return {
+    props: {
+      product: data,
+    },
+  };
+};
 
+const Product = ({ product }: { product: TProduct }): JSX.Element => {
   return (
     <>
       <h2>{product.id}</h2>
